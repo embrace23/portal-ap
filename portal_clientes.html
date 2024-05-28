@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de clientes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bodyIngreso">
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+        <img src="src/images/LOGO AP 2024_INVERTIDO.png" alt="Amigo Paisano" style="height: 140px; width: auto; margin-top: 20px;">
+        <!--
+        <div class="" style="display: flex; justify-content: center; margin-top: -20px;">
+            <p style="margin-right: 10px; font-size: 8px; color: #ababab;">Power by:</p>
+            <img src="src/images/GFA.svg" alt="" style="width: 80px; height: auto;">
+        </div>
+        -->
+    </div>
+    <div class="usuarioBusqueda portalCliente">
+        <div class="tituloLogin">
+            <p class="">¡Bienvenido a tu área de clientes!</p>
+        </div>
+        <div class="subtituloLogin">
+            <p>Accede y gestiona el programa de Asistencia Funeraria</p>
+        </div>
+        <form id="searchForm" action="session.php" method="POST" target="_blank" class="usuarioForm">
+            <div class="form-group">
+                <input type="text" id="usuario" name="usuario" required placeholder='Nombre de usuario'>
+                <div class="formLabel">
+                    <label for="usuario" class="correoLogueo">Usuario brindado por Amigo Paisano</label>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <input type="password" id="contrasena" name="contrasena" required placeholder='Código de acceso'>    
+                <div class="formLabel">
+                    <label for="contrasena" class="passLogueo">Mínimo 8 caracteres, con mayúscula y número</label>
+                </div>
+            </div>
+            <button type="submit">INGRESAR</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+.form-group {
+    margin-bottom: 20px;
+}
+
+.bodyCliente {
+    background-color: #f0f0f0; /* Fondo del cuerpo */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.tituloCliente {
+    text-align: center;
+    color: #333; /* Color del texto del título */
+}
+
+.cargaCliente {
+    margin-top: 20px; /* Espacio superior */
+}
+
+.formCliente {
+    background-color: #fff; /* Fondo del formulario */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Ancho del formulario */
+}
+
+.formCliente .form-group {
+    margin-bottom: 15px;
+}
+
+.formCliente label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333; /* Color del texto de la etiqueta */
+}
+
+.formCliente input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.formCliente button {
+    background-color: #33a0a6; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.formCliente button:hover {
+    background-color: #1c7d84; /* Cambio de color al pasar el ratón sobre el botón */
+}
+
+/* Descarga de voucher */
+
+.bodyUsuario, .bodyIngreso {
+    background-color: #00a0df;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.tituloUsuario {
+    text-align: center;
+    color: #333;
+}
+
+.usuarioBusqueda{
+    width: 350px;
+    height: auto;
+    min-height: 400px;
+    margin: 10px 0 30px 0;
+    border-radius: 10px;
+    background: #0077c8;
+    background: linear-gradient(to bottom, #0b71af -40%, #1e1e58 100%);
+    padding: 13px 60px 24px 60px;
+}
+
+.tituloLogin p{
+    width: auto;
+    height: auto;
+    font-size: 30px;
+    font-weight: normal;
+    line-height: 1.1;
+    letter-spacing: normal;
+    text-align: center;
+    color: #fff;
+    margin: 0 auto 9px;
+}
+
+.subtituloLogin p{
+    width: auto;
+    height: auto;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    text-align: center;
+    color: #fff;
+    margin: 0 auto;
+}
+
+.usuarioForm{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.usuarioForm input{
+    height: 48px;
+    width: 300px;
+    padding: 0 10px;
+    background-color: #fff;
+    border: 1px solid #4a4a4a;
+    border-radius: 10px;
+}
+
+.usuarioForm ::-webkit-input-placeholder{   
+    color: #048c94;
+}
+
+.usuarioForm button{
+    color: #fff;
+  	font-weight: bold;
+    background-color: #76bc21;
+    opacity: 1 !important;
+    border-radius: 15px;
+    height: 45px;
+    width: 280px;
+    padding: 14px 16px;
+    border: none;
+    margin-top: 10px;
+}
+
+.formLabel{
+    text-align: left;
+    margin: 0px 0px 0px 20px;
+    padding: 0;
+}
+
+.formLabel label{
+    font-size: 10px;
+    color: #fff
+}
+
+.portalCliente button{
+    text-transform: capitalize;
+}
+/* Media query para pantallas más pequeñas */
+@media (max-width: 600px) {
+    .usuarioForm {
+        width: 90%;
+    }
+}

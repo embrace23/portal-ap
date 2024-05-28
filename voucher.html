@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Descarga de voucher</title>
+</head>
+
+<body class="bodyUsuario">
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+        <img src="src/images/LOGO AP 2024_INVERTIDO.png" alt="Amigo Paisano" style="height: 140px; width: auto; margin-top: 20px;">
+        <!--
+        <div class="" style="display: flex; justify-content: center; margin-top: -20px;">
+            <p style="margin-right: 10px; font-size: 8px; color: #ababab;">Power by:</p>
+            <img src="src/images/GFA.svg" alt="" style="width: 80px; height: auto;">
+        </div>
+        -->
+    </div>
+    
+    <!--Formulario para que el usuario se busque por nombre, apellido y plan contratado-->
+    <div class="usuarioBusqueda">
+        <div class="tituloLogin">
+            <p class="">¡<strong>Bienvenido</strong> a tu gestión de <strong>Asistencia Funeraria</strong>!</p>
+        </div>
+        <div class="subtituloLogin">
+            <p>Accede y descarga tu programa de beneficios</p>
+        </div>
+        <form id="searchForm" action="crear.php" method="GET" target="_blank" class="usuarioForm">
+            <div class="form-group">
+                <!--<label for="nombre">Nombre:</label>-->
+                <input type="text" id="nombre" name="nombre" placeholder="Nombres" required>
+            </div>
+            
+            <div class="form-group">
+                <!--<label for="apellido">Apellido:</label>-->
+                <input type="text" id="apellido" name="apellido" placeholder="Apellidos" required>
+            </div>
+            
+            <div class="form-group">
+                <!--<label for="cod_cliente">Código de cliente:</label>-->
+                <input type="text" id="cod_cliente" name="cod_cliente" placeholder="Código de Cliente" required>
+            </div>
+    
+            <button type="submit">DESCARGAR</button>
+        </form>
+    </div>
+
+</body>
+</html>
