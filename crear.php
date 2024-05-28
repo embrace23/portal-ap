@@ -1,7 +1,7 @@
 <?php
 require_once 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
-//use Dompdf\Options;
+use Dompdf\Options;
 session_start();
 
 // Incluir el archivo de configuración
@@ -37,15 +37,27 @@ if(isset($_GET['nombre']) && isset($_GET['apellido']) && isset($_GET['cod_client
         $url .= "term_date=" . urlencode($row['term_date']) . "&";
         $url .= "preexistence=" . urlencode($row['preexistence']);
 
-        // Obtener el HTML desde la URL
-        $html = file_get_contents_curl($url);
+        function file_get_contents_curls($url){
+            $crl = curl_init();
+            $timeout = 5;
+            curl_setopt($crl, CURLOPT_URL, $url);
+            curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($crl, CURLOPT_CONNECTTIMEOUT, $timeout);
+            curl_setopt($crl, CURLOPT_FOLLOWLOCATION, true); // Seguir redirecciones
+        
+            $ret = curl_exec($crl);
+            curl_close($crl);
+            return $ret;
+        }
+        
+        $html = file_get_contents_curls($url);
 
 
         // Crear un nuevo objeto Dompdf
-        //$options = new Options();
-        //$options->set('isRemoteEnabled', true);
-        //$pdf = new Dompdf($options);
-		$pdf = new Dompdf();
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $pdf = new Dompdf($options);
+		//$pdf = new Dompdf();
         // Configurar el tamaño y orientación del papel
         $pdf->set_paper("A4", "portrait");
 
