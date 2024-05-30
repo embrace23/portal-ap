@@ -24,6 +24,10 @@ try {
     // Obtener el mes actual para la validación de upload_date
     $mes_actual = date('m');
 
+    $filas_cargadas = 0;
+    $filas_actualizadas = 0;
+    $errores = [];
+
     // Inicialización de variable para ser usada con los registros
     $i = 0;
 
@@ -40,7 +44,9 @@ try {
 
         // Validar número de columnas
         if (count($datos) < 10) {
-            throw new Exception("Error en la línea $i del archivo: número insuficiente de columnas.");
+            $errores[] = "Error en la línea $i: número insuficiente de columnas.";
+            $i++;
+            continue;
         }
 
         // Variables de cada columna
@@ -59,7 +65,9 @@ try {
         $checkemail_duplicidad = "SELECT cod_cliente FROM pax WHERE cod_cliente='$cod_cliente'";
         $ca_dupli = mysqli_query($con, $checkemail_duplicidad);
         if (!$ca_dupli) {
-            throw new Exception('Error al verificar duplicados: ' . mysqli_error($con));
+            $errores[] = "Error al verificar duplicados en la línea $i: " . mysqli_error($con);
+            $i++;
+            continue;
         }
         $cant_duplicidad = mysqli_num_rows($ca_dupli);
 
@@ -93,10 +101,12 @@ try {
                 '$term_date',
                 '$fecha_actual',
                 '1',
-                'Yes'
+                'No'
             )";
             if (!mysqli_query($con, $insertarData)) {
-                throw new Exception('Error al insertar en pax: ' . mysqli_error($con));
+                $errores[] = "Error al insertar en pax en la línea $i: " . mysqli_error($con);
+                $i++;
+                continue;
             }
 
             // Insertar datos en tabla por cliente
@@ -128,11 +138,14 @@ try {
                 '$term_date',
                 '$fecha_actual',
                 '1',
-                'Yes'
+                'No'
             )";
             if (!mysqli_query($con, $insertarTablaIndividual)) {
-                throw new Exception('Error al insertar en tabla individual: ' . mysqli_error($con));
+                $errores[] = "Error al insertar en tabla individual en la línea $i: " . mysqli_error($con);
+                $i++;
+                continue;
             }
+            $filas_cargadas++;
         } else {
             // Si ya existe, actualizar datos en tabla general 'pax'
             $updateData = "UPDATE pax SET 
@@ -147,7 +160,7 @@ try {
                 term_date='$term_date',
                 upload_date='$fecha_actual',
                 continuity_subs=continuity_subs + 1,
-                preexistence=IF(continuity_subs + 1 >= 6, 'No', 'Yes')
+                preexistence=IF(continuity_subs + 1 >= 6, 'Si', 'No')
                 WHERE cod_cliente='$cod_cliente'";
             if (!mysqli_query($con, $updateData)) {
                 throw new Exception('Error al actualizar en pax: ' . mysqli_error($con));
@@ -167,18 +180,26 @@ try {
                 term_date='$term_date',
                 upload_date='$fecha_actual',
                 continuity_subs=continuity_subs + 1,
-                preexistence=IF(continuity_subs + 1 >= 6, 'No', 'Yes')
+                preexistence=IF(continuity_subs + 1 >= 6, 'Si', 'No')
                 WHERE cod_cliente='$cod_cliente'";
-            if (!mysqli_query($con, $updateTablaIndividual)) {
-                throw new Exception('Error al actualizar en tabla individual: ' . mysqli_error($con));
+            if (!mysqli_query($con, $updateData)) {
+                $errores[] = "Error al actualizar en pax en la línea $i: " . mysqli_error($con);
+                $i++;
+                continue;
             }
+            $filas_actualizadas++;
         }
 
         $i++;
     }
-} catch (Exception $e) {
-    echo 'Error: ' . $e->getMessage();
-}
+        // Mensaje de éxito y resumen de la carga
+        $mensaje = "Se cargó el archivo correctamente. <br> Filas cargadas: $filas_cargadas <br> Filas actualizadas: $filas_actualizadas <br>";
+        if (!empty($errores)) {
+            $mensaje .= "Errores:<br>" . implode("<br>", $errores);
+        }
+    } catch (Exception $e) {
+        $mensaje = 'Error: ' . $e->getMessage();
+    }
 ?>
 
 
@@ -234,7 +255,7 @@ try {
     </style>
 </head>
 <body>
-    <p>Se cargó el archivo correctamente.</p>
+    <p><?php echo $mensaje; ?></p>
     <a href="portal_clientes.html">Volver</a>
 </body>
 </html>

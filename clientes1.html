@@ -5,10 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Carga de datos</title>
+    <style>
+        .bodyCliente{
+            margin-top: 50px;
+        }
+        .explicacion {
+            display: none;
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .explicacion h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .explicacion ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .explicacion ul li {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .explicacion p {
+            color: #333;
+        }
+
+        .btn-explicacion {
+            background-color: #33a0a6; /* Color de fondo del botón */
+            color: #fff; /* Color del texto del botón */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .btn-explicacion:hover {
+            background-color: #1c7d84; /* Cambio de color al pasar el ratón sobre el botón */
+        }
+    </style>
+    <script>
+        function toggleExplicacion() {
+            var explicacion = document.getElementById("explicacion");
+            if (explicacion.style.display === "none" || explicacion.style.display === "") {
+                explicacion.style.display = "block";
+            } else {
+                explicacion.style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body class="bodyCliente">
-    <h2 class="tituloCliente">Cargar Archivo Excel 1</h2>
-    <!--Formulario para cargar un archivo-->
+    <h2 class="tituloCliente">Cargar Archivo CSV</h2>
+
+    <!-- Botón para mostrar/ocultar la explicación -->
+    <button class="btn-explicacion" onclick="toggleExplicacion()">Mostrar/Ocultar Explicación</button>
+
+    <!-- Explicación sobre el formato del archivo CSV -->
+    <div id="explicacion" class="explicacion">
+        <h3>Formato del archivo CSV</h3>
+        <p>El archivo CSV debe tener las siguientes columnas en el siguiente orden:</p>
+        <ul>
+            <li><strong>first_name</strong>: El primer nombre del cliente.</li>
+            <li><strong>last_name</strong>: El apellido del cliente.</li>
+            <li><strong>date_of_birth</strong>: Fecha de nacimiento del cliente.</li>
+            <li><strong>age</strong>: La edad del cliente.</li>
+            <li><strong>cod_cliente</strong>: El código único del cliente.</li>
+            <li><strong>nationality</strong>: La nacionalidad del cliente.</li>
+            <li><strong>issuance_country</strong>: País de emisión.</li>
+            <li><strong>issuing_date</strong>: La fecha de emisión del voucher (formato: YYYY-MM-DD).</li>
+            <li><strong>effective_date</strong>: La fecha de inicio de vigencia (formato: YYYY-MM-DD).</li>
+            <li><strong>term_date</strong>: La fecha de fin de vigencia (formato: YYYY-MM-DD).</li>
+        </ul>
+        <p>Asegúrese de que el archivo esté en formato CSV y que las columnas estén correctamente nombradas y ordenadas como se indica.</p>
+    </div>
+
+    <!-- Formulario para cargar un archivo -->
     <div class="cargaCliente">
         <form action="procesar.php" method="post" enctype="multipart/form-data" class="formCliente">
             <div class="form-group">
